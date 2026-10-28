@@ -248,452 +248,374 @@
 
     <!-- APPLICATION SCRIPT LOGIC -->
     <script>
-        // MOCK DATA STORAGE
-        let profiles = [
-            {
-                id: 1, name: "Vikram Rathore", age: 27, gender: "Male", gotra: "Chauhan", city: "Indore", state: "Madhya Pradesh",
-                education: "B.Tech in Computer Science", profession: "Software Engineer at MNC", income: "₹14-16 LPA", height: "5' 10\"",
-                familyDetails: "Father: Merchant (Business), Mother: Homemaker, 1 Sister (Married)",
-                photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-                verified: true, contact: "+91 98765 43210", about: "Looking for an educated, understanding partner with traditional yet modern values."
-            },
-            {
-                id: 2, name: "Pooja Rathore", age: 25, gender: "Female", gotra: "Parihar", city: "Ujjain", state: "Madhya Pradesh",
-                education: "M.Com, B.Ed", profession: "High School Teacher", income: "₹4.5 - 6 LPA", height: "5' 4\"",
-                familyDetails: "Father: Govt Officer, Mother: Teacher, 1 Brother (Studying)",
-                photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-                verified: true, contact: "+91 98765 12345", about: "Passionate about teaching and cultural roots. Enjoys painting, music, and family gatherings."
-            },
-            {
-                id: 3, name: "Rahul Rathore", age: 29, gender: "Male", gotra: "Solanki", city: "Bhopal", state: "Madhya Pradesh",
-                education: "MBA in Marketing", profession: "Business Owner (Textiles & Garments)", income: "₹18-22 LPA", height: "5' 9\"",
-                familyDetails: "Father: Business Head, Mother: Homemaker, 2 Brothers",
-                photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-                verified: true, contact: "+91 98260 99887", about: "Managing family retail store network in Bhopal. Looking for a supportive lifecycle companion."
-            },
-            {
-                id: 4, name: "Neha Rathore", age: 24, gender: "Female", gotra: "Rathod", city: "Jaipur", state: "Rajasthan",
-                education: "B.Pharm / M.Pharm", profession: "Clinical Researcher", income: "₹7-9 LPA", height: "5' 5\"",
-                familyDetails: "Father: Retired Bank Mgr, Mother: Homemaker, 1 Sister",
-                photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
-                verified: true, contact: "+91 94140 33221", about: "Simplicity and sincerity are my core values. Family-oriented and hardworking."
-            }
-        ];
+    // --- MOCK DATA STORAGE ---
+    let profiles = [
+        {
+            id: 1, name: "Vikram Rathore", age: 27, gender: "Male", gotra: "Chauhan", city: "Indore", state: "Madhya Pradesh",
+            education: "B.Tech in Computer Science", profession: "Software Engineer at MNC", income: "₹14-16 LPA", height: "5' 10\"",
+            familyDetails: "Father: Merchant (Business), Mother: Homemaker, 1 Sister (Married)",
+            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+            verified: true, contact: "+91 98765 43210", about: "Looking for an educated, understanding partner with traditional yet modern values."
+        },
+        {
+            id: 2, name: "Pooja Rathore", age: 25, gender: "Female", gotra: "Parihar", city: "Ujjain", state: "Madhya Pradesh",
+            education: "M.Com, B.Ed", profession: "High School Teacher", income: "₹4.5 - 6 LPA", height: "5' 4\"",
+            familyDetails: "Father: Govt Officer, Mother: Teacher, 1 Brother (Studying)",
+            photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+            verified: true, contact: "+91 98765 12345", about: "Passionate about teaching and cultural roots. Enjoys painting, music, and family gatherings."
+        },
+        {
+            id: 3, name: "Rahul Rathore", age: 29, gender: "Male", gotra: "Solanki", city: "Bhopal", state: "Madhya Pradesh",
+            education: "MBA in Marketing", profession: "Business Owner (Textiles & Garments)", income: "₹18-22 LPA", height: "5' 9\"",
+            familyDetails: "Father: Business Head, Mother: Homemaker, 2 Brothers",
+            photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+            verified: true, contact: "+91 98260 99887", about: "Managing family retail store network in Bhopal. Looking for a supportive lifecycle companion."
+        },
+        {
+            id: 4, name: "Neha Rathore", age: 24, gender: "Female", gotra: "Rathod", city: "Jaipur", state: "Rajasthan",
+            education: "B.Pharm / M.Pharm", profession: "Clinical Researcher", income: "₹7-9 LPA", height: "5' 5\"",
+            familyDetails: "Father: Retired Bank Mgr, Mother: Homemaker, 1 Sister",
+            photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
+            verified: true, contact: "+91 94140 33221", about: "Simplicity and sincerity are my core values. Family-oriented and hardworking."
+        }
+    ];
 
-        let ads = [
-            {
-                id: 1, title: "Rathore Saree & Textile Emporium", owner: "Rameshwar Rathore", category: "Clothing & Retail", city: "Indore",
-                address: "142, Rajwada Main Market, Indore", phone: "+91 98261 11223",
-                tagline: "Exclusive Silk Sarees, Bridal Lehengas & Designer Suits for all occasions.",
-                offer: "10% Discount for Rathore Samaj Members!", rating: "4.9 ★", isFeatured: true,
-                banner: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 2, title: "Shree Rathore Hardware & Electronics", owner: "Suresh Rathore", category: "Hardware & Home Imprv.", city: "Ujjain",
-                address: "45, Freeganj Tower Road, Ujjain", phone: "+91 94250 55443",
-                tagline: "Wholesale & Retail in Quality Electricals, Sanitaryware & Paints.",
-                offer: "Free Delivery within 15 km", rating: "4.8 ★", isFeatured: false,
-                banner: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 3, title: "Rathore Caterers & Event Decorators", owner: "Kailash Rathore", category: "Event Management", city: "Bhopal",
-                address: "88, MP Nagar Zone 2, Bhopal", phone: "+91 99933 77112",
-                tagline: "Authentic Pure Veg Rajasthani & Malwi Cuisine for Weddings & Samiti Sammelans.",
-                offer: "Special Package for Samaj Sammelan Bookings", rating: "5.0 ★", isFeatured: true,
-                banner: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=600&q=80"
-            }
-        ];
+    let ads = [
+        {
+            id: 1, title: "Rathore Saree & Textile Emporium", owner: "Rameshwar Rathore", category: "Clothing & Retail", city: "Indore",
+            address: "142, Rajwada Main Market, Indore", phone: "+91 98261 11223",
+            tagline: "Exclusive Silk Sarees, Bridal Lehengas & Designer Suits for all occasions.",
+            offer: "10% Discount for Rathore Samaj Members!", rating: "4.9 ★", isFeatured: true,
+            banner: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+            id: 2, title: "Shree Rathore Hardware & Electronics", owner: "Suresh Rathore", category: "Hardware & Home Imprv.", city: "Ujjain",
+            address: "45, Freeganj Tower Road, Ujjain", phone: "+91 94250 55443",
+            tagline: "Wholesale & Retail in Quality Electricals, Sanitaryware & Paints.",
+            offer: "Free Delivery within 15 km", rating: "4.8 ★", isFeatured: false,
+            banner: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
+        }
+    ];
 
-        let events = [
-            {
-                id: 1, title: "Var-Vadhu Parichay Sammelan 2026", date: "15th November 2026", time: "10:00 AM - 5:00 PM",
-                venue: "Abhay Prashal Auditorium, Race Course Road, Indore", organizedBy: "Akhil Bharatiya Rathore Samaj Samiti",
-                description: "Annual grand matrimonial meet up for eligible Rathore boys and girls. Registration required before 10th Nov.", badge: "Grand Event"
-            },
-            {
-                id: 2, title: "Rathore Samaj Youth & Business Expo", date: "5th December 2026", time: "11:00 AM Onwards",
-                venue: "Community Hall, Freeganj, Ujjain", organizedBy: "Rathore Vyapar Mandal",
-                description: "Exhibition for community entrepreneurs to network, display products, and expand local trade connections.", badge: "Networking"
-            }
-        ];
+    let events = [
+        {
+            id: 1, title: "Var-Vadhu Parichay Sammelan 2026", date: "15th November 2026", time: "10:00 AM - 5:00 PM",
+            venue: "Abhay Prashal Auditorium, Race Course Road, Indore", organizedBy: "Akhil Bharatiya Rathore Samaj Samiti",
+            description: "Annual grand matrimonial meet up for eligible Rathore boys and girls. Registration required before 10th Nov.", badge: "Grand Event"
+        }
+    ];
 
-        let favorites = [];
-        let currentGenderFilter = 'all';
+    let favorites = [];
+    let currentGenderFilter = 'all';
 
-        // Render everything immediately upon load
-        window.addEventListener('DOMContentLoaded', () => {
-            renderProfiles();
-            renderAds();
-            renderEvents();
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
+    // Track Unlocked Matrimony Profiles (Free limit = 3)
+    let unlockedProfiles = JSON.parse(localStorage.getItem('unlocked_profiles')) || [];
+    const FREE_LIMIT = 3;
+    let isGoldPassActive = localStorage.getItem('gold_pass') === 'true';
+
+    window.addEventListener('DOMContentLoaded', () => {
+        renderProfiles();
+        renderAds();
+        renderEvents();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+
+    // Tab Navigation
+    function switchTab(tab) {
+        ['matrimony', 'directory', 'booklet', 'events'].forEach(t => {
+            const el = document.getElementById(`tab-${t}`);
+            if (el) el.classList.add('hidden');
+            const btn = document.getElementById(`nav-btn-${t}`);
+            if (btn) btn.className = "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all text-amber-100 hover:bg-white/10";
+        });
+        const activeEl = document.getElementById(`tab-${tab}`);
+        if (activeEl) activeEl.classList.remove('hidden');
+        const activeBtn = document.getElementById(`nav-btn-${tab}`);
+        if (activeBtn) activeBtn.className = "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all bg-amber-500 text-red-950 shadow-md font-bold";
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu) menu.classList.toggle('hidden');
+    }
+
+    // Render Matrimony Profiles
+    function renderProfiles() {
+        const search = document.getElementById('search-input')?.value.toLowerCase() || '';
+        const gotra = document.getElementById('gotra-input')?.value.toLowerCase() || '';
+        const city = document.getElementById('city-input')?.value.toLowerCase() || '';
+
+        const filtered = profiles.filter(p => {
+            const matchSearch = p.name.toLowerCase().includes(search) || p.profession.toLowerCase().includes(search) || p.education.toLowerCase().includes(search);
+            const matchGender = currentGenderFilter === 'all' || p.gender === currentGenderFilter;
+            const matchGotra = !gotra || p.gotra.toLowerCase().includes(gotra);
+            const matchCity = !city || p.city.toLowerCase().includes(city);
+            return matchSearch && matchGender && matchGotra && matchCity;
         });
 
-        // Tab Navigation
-        function switchTab(tab) {
-            ['matrimony', 'directory', 'booklet', 'events'].forEach(t => {
-                const el = document.getElementById(`tab-${t}`);
-                if (el) el.classList.add('hidden');
-                const btn = document.getElementById(`nav-btn-${t}`);
-                if (btn) {
-                    btn.className = "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all text-amber-100 hover:bg-white/10";
-                }
-            });
-            const activeEl = document.getElementById(`tab-${tab}`);
-            if (activeEl) activeEl.classList.remove('hidden');
-            const activeBtn = document.getElementById(`nav-btn-${tab}`);
-            if (activeBtn) {
-                activeBtn.className = "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all bg-amber-500 text-red-950 shadow-md font-bold";
-            }
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
+        const countLabel = document.getElementById('profile-count-label');
+        if (countLabel) countLabel.innerHTML = `Showing <strong>${filtered.length}</strong> Rathore Samaj Biodatas`;
+        
+        const grid = document.getElementById('profiles-grid');
+        if (!grid) return;
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden');
-        }
-
-        // Render Matrimony Profiles
-        function renderProfiles() {
-            const searchInput = document.getElementById('search-input');
-            const gotraInput = document.getElementById('gotra-input');
-            const cityInput = document.getElementById('city-input');
-
-            const search = searchInput ? searchInput.value.toLowerCase() : '';
-            const gotra = gotraInput ? gotraInput.value.toLowerCase() : '';
-            const city = cityInput ? cityInput.value.toLowerCase() : '';
-
-            const filtered = profiles.filter(p => {
-                const matchSearch = p.name.toLowerCase().includes(search) || p.profession.toLowerCase().includes(search) || p.education.toLowerCase().includes(search);
-                const matchGender = currentGenderFilter === 'all' || p.gender === currentGenderFilter;
-                const matchGotra = !gotra || p.gotra.toLowerCase().includes(gotra);
-                const matchCity = !city || p.city.toLowerCase().includes(city);
-                return matchSearch && matchGender && matchGotra && matchCity;
-            });
-
-            const countLabel = document.getElementById('profile-count-label');
-            if (countLabel) {
-                countLabel.innerHTML = `Showing <strong>${filtered.length}</strong> Rathore Samaj Biodatas`;
-            }
-            
-            const grid = document.getElementById('profiles-grid');
-            if (!grid) return;
-
-            grid.innerHTML = filtered.map(p => `
-                <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-200/70 overflow-hidden flex flex-col sm:flex-row">
-                    <div class="sm:w-2/5 relative h-64 sm:h-auto bg-amber-100">
-                        <img src="${p.photo}" alt="${p.name}" class="w-full h-full object-cover">
-                        <div class="absolute top-3 left-3 bg-red-900/90 text-amber-200 text-xs font-semibold px-2.5 py-1 rounded-full shadow backdrop-blur-sm">
-                            Gotra: ${p.gotra}
+        grid.innerHTML = filtered.map(p => `
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-200/70 overflow-hidden flex flex-col sm:flex-row">
+                <div class="sm:w-2/5 relative h-64 sm:h-auto bg-amber-100">
+                    <img src="${p.photo}" alt="${p.name}" class="w-full h-full object-cover">
+                    <div class="absolute top-3 left-3 bg-red-900/90 text-amber-200 text-xs font-semibold px-2.5 py-1 rounded-full shadow">Gotra: ${p.gotra}</div>
+                </div>
+                <div class="p-5 sm:w-3/5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 font-serif flex items-center gap-1">${p.name}</h3>
+                                <p class="text-xs text-amber-800 font-semibold">${p.age} Yrs • ${p.height}</p>
+                            </div>
+                            <span class="text-xs font-bold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-md">${p.city}</span>
                         </div>
-                        <button onclick="toggleFavorite(${p.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-red-600 hover:bg-white transition-all shadow">
-                            <i data-lucide="heart" class="w-4 h-4 ${favorites.includes(p.id) ? 'fill-red-600' : ''}"></i>
+                        <div class="mt-4 space-y-2 text-xs text-slate-600">
+                            <div class="flex items-center gap-2"><i data-lucide="graduation-cap" class="w-4 h-4 text-amber-700 shrink-0"></i><span>${p.education}</span></div>
+                            <div class="flex items-center gap-2"><i data-lucide="briefcase" class="w-4 h-4 text-amber-700 shrink-0"></i><span>${p.profession}</span></div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+                        <button onclick="openProfileModal(${p.id})" class="flex-1 bg-gradient-to-r from-red-900 to-rose-900 text-amber-100 text-xs font-bold py-2.5 px-3 rounded-xl shadow flex items-center justify-center gap-1">
+                            <i data-lucide="eye" class="w-3.5 h-3.5"></i> View Full Biodata
                         </button>
                     </div>
-                    <div class="p-5 sm:w-3/5 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="text-xl font-bold text-slate-900 font-serif flex items-center gap-1">
-                                        ${p.name} ${p.verified ? '<i data-lucide="check-circle" class="w-4 h-4 text-emerald-600 inline"></i>' : ''}
-                                    </h3>
-                                    <p class="text-xs text-amber-800 font-semibold">${p.age} Yrs • ${p.height}</p>
-                                </div>
-                                <span class="text-xs font-bold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-md">${p.city}</span>
-                            </div>
-                            <div class="mt-4 space-y-2 text-xs text-slate-600">
-                                <div class="flex items-center gap-2"><i data-lucide="graduation-cap" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="truncate">${p.education}</span></div>
-                                <div class="flex items-center gap-2"><i data-lucide="briefcase" class="w-4 h-4 text-amber-700 shrink-0"></i><span class="truncate">${p.profession}</span></div>
-                                <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-amber-700 shrink-0"></i><span>${p.city}, ${p.state}</span></div>
-                            </div>
-                            <p class="mt-3 text-xs text-slate-500 line-clamp-2 italic bg-amber-50/50 p-2 rounded-lg border border-amber-100">"${p.about}"</p>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
-                            <button onclick="openProfileModal(${p.id})" class="flex-1 bg-gradient-to-r from-red-900 to-rose-900 hover:from-red-800 hover:to-rose-800 text-amber-100 text-xs font-bold py-2.5 px-3 rounded-xl shadow transition-all flex items-center justify-center gap-1">
-                                <i data-lucide="eye" class="w-3.5 h-3.5"></i> View Full Biodata
-                            </button>
-                            <a href="tel:${p.contact}" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-2.5 rounded-xl border border-emerald-200 transition-all">
-                                <i data-lucide="phone" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
-            `).join('');
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
+            </div>
+        `).join('');
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
 
-        function filterProfiles() { renderProfiles(); }
+    function filterProfiles() { renderProfiles(); }
+    function setGenderFilter(gender) { currentGenderFilter = gender; renderProfiles(); }
 
-        function setGenderFilter(gender) {
-            currentGenderFilter = gender;
-            ['all', 'Male', 'Female'].forEach(g => {
-                const btn = document.getElementById(`filter-gender-${g.toLowerCase()}`);
-                if(btn) {
-                    btn.className = (g === gender) ? "px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-900 text-white shadow" : "px-3 py-1.5 rounded-lg text-xs font-semibold text-red-900";
-                }
-            });
-            renderProfiles();
-        }
+    // --- STRICT 3-CONTACT LIMIT MODAL LOGIC ---
+    function openProfileModal(id) {
+        const p = profiles.find(x => x.id === id);
+        if (!p) return;
 
-        function toggleFavorite(id) {
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(f => f !== id);
-            } else {
-                favorites.push(id);
+        const isUnlocked = isGoldPassActive || unlockedProfiles.includes(id);
+        const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
+
+        const container = document.getElementById('modal-container');
+        const content = document.getElementById('modal-content');
+        container.classList.remove('hidden');
+        container.classList.add('flex');
+
+        if (isUnlocked || hasFreeSlots) {
+            if (!isUnlocked && !unlockedProfiles.includes(id)) {
+                unlockedProfiles.push(id);
+                localStorage.setItem('unlocked_profiles', JSON.stringify(unlockedProfiles));
             }
-            renderProfiles();
-        }
-
-        // Render Business Ads
-        function renderAds() {
-            const grid = document.getElementById('ads-grid');
-            if (!grid) return;
-            grid.innerHTML = ads.map(ad => `
-                <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-200 overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <div class="relative h-44 bg-slate-100">
-                            <img src="${ad.banner}" alt="${ad.title}" class="w-full h-full object-cover">
-                            <div class="absolute top-3 left-3 bg-red-950 text-amber-300 text-xs font-bold px-2.5 py-1 rounded-md shadow">${ad.category}</div>
-                            ${ad.isFeatured ? '<div class="absolute top-3 right-3 bg-amber-400 text-red-950 text-xs font-extrabold px-2 py-0.5 rounded shadow flex items-center gap-1"><i data-lucide="sparkles" class="w-3 h-3"></i> Featured</div>' : ''}
-                        </div>
-                        <div class="p-5">
-                            <h3 class="font-bold text-lg text-slate-900 font-serif leading-tight mb-1">${ad.title}</h3>
-                            <p class="text-xs font-semibold text-amber-800 mb-2">Owner: ${ad.owner}</p>
-                            <p class="text-xs text-slate-600 line-clamp-2 mb-3">${ad.tagline}</p>
-                            ${ad.offer ? `<div class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs p-2 rounded-lg font-semibold flex items-center gap-1.5 mb-3"><i data-lucide="award" class="w-4 h-4 text-emerald-600 shrink-0"></i><span>${ad.offer}</span></div>` : ''}
-                            <div class="space-y-1.5 text-xs text-slate-500">
-                                <div class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-700 shrink-0"></i><span class="truncate">${ad.address}</span></div>
-                                <div class="flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5 text-amber-700 shrink-0"></i><span>${ad.phone}</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-5 pt-0">
-                        <button onclick="openAdModal(${ad.id})" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-200 font-bold py-2 rounded-xl text-xs transition-all">View Shop Details & Offer</button>
-                    </div>
-                </div>
-            `).join('');
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
-
-        // Render Events
-        function renderEvents() {
-            const grid = document.getElementById('events-grid');
-            if (!grid) return;
-            grid.innerHTML = events.map(evt => `
-                <div class="bg-white rounded-2xl shadow-md border border-amber-200 p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="bg-red-100 text-red-900 text-xs font-bold px-3 py-1 rounded-full">${evt.badge}</span>
-                            <span class="text-xs font-semibold text-amber-800 flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> ${evt.date}</span>
-                        </div>
-                        <h3 class="text-xl font-bold font-serif text-slate-900 mb-2">${evt.title}</h3>
-                        <p class="text-xs text-slate-600 mb-4">${evt.description}</p>
-                        <div class="space-y-2 text-xs text-slate-500 border-t border-amber-100 pt-3">
-                            <div class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i><span><strong>Venue:</strong> ${evt.venue}</span></div>
-                            <div class="flex items-center gap-2"><i data-lucide="building-2" class="w-4 h-4 text-amber-700 shrink-0"></i><span><strong>Organizers:</strong> ${evt.organizedBy}</span></div>
-                        </div>
-                    </div>
-                    <button onclick="alert('Registered interest for: ${evt.title}')" class="mt-6 w-full bg-red-900 hover:bg-red-800 text-amber-100 font-bold py-2.5 rounded-xl text-xs shadow transition-all">Confirm Attendance / Register</button>
-                </div>
-            `).join('');
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
-
-        // Modal Controllers
-        function openModal(type) {
-            const container = document.getElementById('modal-container');
-            const content = document.getElementById('modal-content');
-            container.classList.remove('hidden');
-            container.classList.add('flex');
-
-            if (type === 'profile') {
-                content.innerHTML = `
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-                    <h2 class="text-2xl font-serif font-bold text-red-950 mb-1">Register Biodata Form</h2>
-                    <p class="text-xs text-slate-500 mb-4">Fill out your family details for the Rathore Samaj matrimonial directory.</p>
-                    <form onsubmit="handleNewProfile(event)" class="space-y-3 text-xs">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div><label class="font-bold text-slate-700">Full Name *</label><input required type="text" id="np-name" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="e.g. Rahul Rathore"></div>
-                            <div>
-                                <label class="font-bold text-slate-700">Age & Gender *</label>
-                                <div class="flex gap-2 mt-1">
-                                    <input required type="number" id="np-age" class="w-1/2 p-2.5 border rounded-xl" placeholder="Age">
-                                    <select id="np-gender" class="w-1/2 p-2.5 border rounded-xl"><option value="Male">Male (Groom)</option><option value="Female">Female (Bride)</option></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div><label class="font-bold text-slate-700">Gotra *</label><input required type="text" id="np-gotra" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="e.g. Chauhan"></div>
-                            <div><label class="font-bold text-slate-700">City *</label><input required type="text" id="np-city" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="e.g. Indore"></div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div><label class="font-bold text-slate-700">Education</label><input type="text" id="np-edu" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="e.g. B.Tech"></div>
-                            <div><label class="font-bold text-slate-700">Profession</label><input type="text" id="np-prof" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="e.g. Engineer"></div>
-                        </div>
-                        <div><label class="font-bold text-slate-700">Family Details</label><textarea rows="2" id="np-family" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Father, Mother, Siblings..."></textarea></div>
-                        <div><label class="font-bold text-slate-700">Contact Number *</label><input required type="text" id="np-contact" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="+91 XXXXX XXXXX"></div>
-                        <button type="submit" class="w-full bg-red-900 hover:bg-red-800 text-amber-100 font-bold py-3 rounded-xl shadow mt-2">Submit & Publish Profile</button>
-                    </form>
-                `;
-            } else if (type === 'ad') {
-                content.innerHTML = `
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-                    <h2 class="text-2xl font-serif font-bold text-red-950 mb-1">Advertise Your Business</h2>
-                    <p class="text-xs text-slate-500 mb-4">Promote your shop/service in the Rathore Samaj directory.</p>
-                    <form onsubmit="handleNewAd(event)" class="space-y-3 text-xs">
-                        <div><label class="font-bold text-slate-700">Shop / Business Name *</label><input required type="text" id="na-title" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="e.g. Rathore Hardware"></div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div><label class="font-bold text-slate-700">Owner Name *</label><input required type="text" id="na-owner" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Owner Name"></div>
-                            <div><label class="font-bold text-slate-700">Category</label><select id="na-category" class="w-full p-2.5 mt-1 border rounded-xl"><option value="Retail & Shopping">Retail & Shopping</option><option value="Hardware & Construction">Hardware & Construction</option><option value="Event & Catering">Event & Catering</option></select></div>
-                        </div>
-                        <div><label class="font-bold text-slate-700">Shop Tagline *</label><textarea required rows="2" id="na-tagline" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Products / Services description..."></textarea></div>
-                        <div><label class="font-bold text-slate-700">Special Samaj Offer (Optional)</label><input type="text" id="na-offer" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="e.g. 10% Discount for Samaj members"></div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div><label class="font-bold text-slate-700">Address *</label><input required type="text" id="na-address" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Shop Address"></div>
-                            <div><label class="font-bold text-slate-700">Phone *</label><input required type="text" id="na-phone" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="+91 XXXXX XXXXX"></div>
-                        </div>
-                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-red-950 font-bold py-3 rounded-xl shadow mt-2">Publish Business Advertisement</button>
-                    </form>
-                `;
-            }
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
-
-        function openProfileModal(id) {
-            const p = profiles.find(x => x.id === id);
-            if (!p) return;
-            const container = document.getElementById('modal-container');
-            const content = document.getElementById('modal-content');
-            container.classList.remove('hidden');
-            container.classList.add('flex');
+            const remaining = FREE_LIMIT - unlockedProfiles.length;
 
             content.innerHTML = `
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="flex items-center justify-between mb-3 bg-amber-100 p-2.5 rounded-xl text-xs font-bold text-amber-900">
+                    <span>🔓 Free Contacts Left: <strong>${isGoldPassActive ? 'Unlimited (Gold Pass)' : (remaining >= 0 ? remaining : 0)}</strong></span>
+                    ${!isGoldPassActive ? '<span class="text-red-900 cursor-pointer underline" onclick="openSubscriptionModal()">Get Gold Pass</span>' : ''}
+                </div>
                 <div class="flex flex-col sm:flex-row gap-5 items-center sm:items-start">
                     <img src="${p.photo}" alt="${p.name}" class="w-32 h-32 rounded-2xl object-cover border-2 border-amber-400 shadow-md shrink-0">
                     <div>
                         <span class="bg-amber-100 text-amber-900 text-xs font-bold px-2.5 py-0.5 rounded-full">Gotra: ${p.gotra}</span>
-                        <h2 class="text-2xl font-bold font-serif text-slate-900 mt-1 flex items-center gap-1.5">${p.name} ${p.verified ? '<i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 inline"></i>' : ''}</h2>
+                        <h2 class="text-2xl font-bold font-serif text-slate-900 mt-1">${p.name}</h2>
                         <p class="text-xs text-slate-500 font-semibold">${p.age} Yrs • ${p.height} • ${p.city}</p>
-                        <p class="text-xs text-emerald-700 font-bold mt-1">Income: ${p.income}</p>
                     </div>
                 </div>
                 <div class="mt-6 space-y-4 border-t border-amber-100 pt-4 text-xs">
-                    <div>
-                        <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Educational & Professional Details</h4>
-                        <div class="grid grid-cols-2 gap-2 mt-2 bg-amber-50/50 p-3 rounded-xl border border-amber-100">
-                            <div><span class="text-slate-500">Education:</span> <p class="font-semibold">${p.education}</p></div>
-                            <div><span class="text-slate-500">Profession:</span> <p class="font-semibold">${p.profession}</p></div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Family Background</h4>
-                        <p class="mt-1 text-slate-600 bg-amber-50/50 p-3 rounded-xl border border-amber-100">${p.familyDetails}</p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">About Candidate</h4>
-                        <p class="mt-1 text-slate-600 bg-amber-50/50 p-3 rounded-xl border border-amber-100">${p.about}</p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Contact & Family Reachout</h4>
-                        <div class="mt-2 bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex justify-between items-center">
-                            <div>
-                                <p class="text-emerald-900 font-bold">${p.contact}</p>
-                                <p class="text-[10px] text-emerald-700">Verified Rathore Samaj Family Member</p>
-                            </div>
-                            <a href="tel:${p.contact}" class="bg-emerald-600 text-white font-bold px-4 py-2 rounded-lg text-xs hover:bg-emerald-700 transition-all flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5"></i> Call Family</a>
-                        </div>
+                    <div><span class="text-slate-500">Education:</span> <p class="font-semibold">${p.education}</p></div>
+                    <div><span class="text-slate-500">Profession:</span> <p class="font-semibold">${p.profession}</p></div>
+                    <div><span class="text-slate-500">Family Background:</span> <p class="font-semibold">${p.familyDetails}</p></div>
+                    <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex justify-between items-center">
+                        <div><p class="text-emerald-900 font-bold">${p.contact}</p><p class="text-[10px] text-emerald-700">Verified Family Contact</p></div>
+                        <a href="tel:${p.contact}" class="bg-emerald-600 text-white font-bold px-4 py-2 rounded-lg text-xs">Call Family</a>
                     </div>
                 </div>
             `;
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
-
-        function openAdModal(id) {
-            const ad = ads.find(x => x.id === id);
-            if (!ad) return;
-            const container = document.getElementById('modal-container');
-            const content = document.getElementById('modal-content');
-            container.classList.remove('hidden');
-            container.classList.add('flex');
-
+        } else {
+            // LOCKED VIEW AFTER 3 FREE CONTACTS
             content.innerHTML = `
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-                <img src="${ad.banner}" alt="${ad.title}" class="w-full h-40 object-cover rounded-2xl mb-4">
-                <span class="bg-red-900 text-amber-200 text-xs font-bold px-2.5 py-1 rounded-md">${ad.category}</span>
-                <h2 class="text-2xl font-bold font-serif text-slate-900 mt-2">${ad.title}</h2>
-                <p class="text-xs text-amber-800 font-semibold">Proprietor: ${ad.owner}</p>
-                <div class="mt-4 space-y-3 text-xs">
-                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-slate-700"><p class="font-medium">${ad.tagline}</p></div>
-                    ${ad.offer ? `<div class="bg-emerald-50 border border-emerald-300 p-3 rounded-xl text-emerald-900 font-bold flex items-center gap-2"><i data-lucide="award" class="w-5 h-5 text-emerald-600 shrink-0"></i><div><p class="text-[10px] uppercase tracking-wide text-emerald-700 font-bold">Samaj Exclusive Discount</p><p>${ad.offer}</p></div></div>` : ''}
-                    <div class="space-y-2 pt-2 text-slate-600">
-                        <p><strong>Address:</strong> ${ad.address}</p>
-                        <p><strong>City:</strong> ${ad.city}</p>
-                        <p><strong>Phone:</strong> ${ad.phone}</p>
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="text-center space-y-4 py-4">
+                    <div class="w-20 h-20 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-3xl shadow-inner border">🔒</div>
+                    <h3 class="text-2xl font-serif font-bold text-red-950">Free Contact Limit Reached!</h3>
+                    <p class="text-xs text-slate-600 max-w-sm mx-auto">You have used your 3 free profile contact views. Upgrade to Samaj Gold Pass for unlimited access.</p>
+                    <div class="bg-amber-50 p-4 rounded-2xl border text-left space-y-1 max-w-sm mx-auto text-xs">
+                        <p class="font-bold text-amber-900">👑 Samaj Matrimony Gold Pass</p>
+                        <p class="text-slate-600">✅ Unlimited Contact Details & Photos Unlocked</p>
+                        <p class="font-extrabold text-red-900 text-sm mt-1">Only ₹199 / Year</p>
                     </div>
-                    <div class="pt-3">
-                        <a href="tel:${ad.phone}" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-200 font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow"><i data-lucide="phone" class="w-4 h-4"></i> Call Shop Owner Directly</a>
-                    </div>
+                    <button onclick="openSubscriptionModal()" class="w-full max-w-sm mx-auto bg-amber-500 text-red-950 font-bold py-3 rounded-xl shadow-lg block text-xs">🚀 Unlock Gold Pass Now</button>
                 </div>
             `;
-            if (typeof lucide !== 'undefined') lucide.createIcons();
         }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
 
-        function closeModal() {
-            const container = document.getElementById('modal-container');
-            container.classList.remove('flex');
-            container.classList.add('hidden');
-        }
+    // --- SUBSCRIPTION MODALS (Matrimony & Business Listing) ---
+    function openSubscriptionModal() {
+        const content = document.getElementById('modal-content');
+        content.innerHTML = `
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="text-center space-y-3 py-2">
+                <h3 class="text-2xl font-serif font-bold text-red-950">Upgrade to Gold Pass (₹199)</h3>
+                <p class="text-xs text-slate-600">Pay via UPI and send screenshot on WhatsApp for instant activation.</p>
+                <div class="bg-amber-50 p-3 rounded-2xl border inline-block">
+                    <div class="w-36 h-36 bg-white border rounded-lg mx-auto flex items-center justify-center text-center p-2 text-[10px] font-bold">
+                        [ UPI QR CODE ]<br>UPI: samaj@paytm
+                    </div>
+                </div>
+                <a href="https://wa.me/91YOURNUMBER?text=Paid%20₹199%20for%20Rathore%20Rishtey%20Gold%20Pass.%20Screenshot:" target="_blank" class="w-full bg-green-700 text-white font-bold py-3 rounded-xl text-xs block">
+                    💬 Confirm via WhatsApp
+                </a>
+            </div>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
 
-        function handleNewProfile(e) {
-            e.preventDefault();
-            const gender = document.getElementById('np-gender').value;
-            const newP = {
-                id: Date.now(),
-                name: document.getElementById('np-name').value,
-                age: document.getElementById('np-age').value,
-                gender: gender,
-                gotra: document.getElementById('np-gotra').value,
-                city: document.getElementById('np-city').value,
-                state: "Madhya Pradesh",
-                education: document.getElementById('np-edu').value,
-                profession: document.getElementById('np-prof').value,
-                income: "₹5-8 LPA",
-                height: "5' 6\"",
-                familyDetails: document.getElementById('np-family').value,
-                photo: gender === 'Female' ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-                verified: true,
-                contact: document.getElementById('np-contact').value,
-                about: "Newly registered Rathore Samaj member profile."
-            };
-            profiles.unshift(newP);
-            closeModal();
-            renderProfiles();
-            alert("Biodata registered successfully!");
-        }
+    // Render Business Ads
+    function renderAds() {
+        const grid = document.getElementById('ads-grid');
+        if (!grid) return;
+        grid.innerHTML = ads.map(ad => `
+            <div class="bg-white rounded-2xl shadow-md border overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="relative h-44 bg-slate-100">
+                        <img src="${ad.banner}" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-red-950 text-amber-300 text-xs font-bold px-2 py-1 rounded">${ad.category}</div>
+                        ${ad.isFeatured ? '<div class="absolute top-3 right-3 bg-amber-400 text-red-950 text-xs font-bold px-2 py-0.5 rounded">★ Featured Shop</div>' : ''}
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg text-slate-900 font-serif mb-1">${ad.title}</h3>
+                        <p class="text-xs font-semibold text-amber-800 mb-2">Owner: ${ad.owner}</p>
+                        <p class="text-xs text-slate-600 mb-3">${ad.tagline}</p>
+                        ${ad.offer ? `<div class="bg-emerald-50 border text-emerald-800 text-xs p-2 rounded-lg font-semibold mb-3">🏷️ ${ad.offer}</div>` : ''}
+                    </div>
+                </div>
+                <div class="p-5 pt-0">
+                    <a href="tel:${ad.phone}" class="w-full bg-slate-900 text-amber-200 font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1">Call Shop Owner</a>
+                </div>
+            </div>
+        `).join('');
+    }
 
-        function handleNewAd(e) {
-            e.preventDefault();
-            const newA = {
-                id: Date.now(),
-                title: document.getElementById('na-title').value,
-                owner: document.getElementById('na-owner').value,
-                category: document.getElementById('na-category').value,
-                city: "Indore",
-                address: document.getElementById('na-address').value,
-                phone: document.getElementById('na-phone').value,
-                tagline: document.getElementById('na-tagline').value,
-                offer: document.getElementById('na-offer').value,
-                rating: "5.0 ★",
-                isFeatured: true,
-                banner: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80"
-            };
-            ads.unshift(newA);
-            closeModal();
-            renderAds();
-            alert("Business advertisement submitted successfully!");
+    // Render Business Ad Submission Modal with Listing Subscription Option
+    function openModal(type) {
+        const container = document.getElementById('modal-container');
+        const content = document.getElementById('modal-content');
+        container.classList.remove('hidden');
+        container.classList.add('flex');
+
+        if (type === 'ad') {
+            content.innerHTML = `
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <h2 class="text-2xl font-serif font-bold text-red-950 mb-1">Advertise Your Business</h2>
+                <p class="text-xs text-slate-500 mb-4">Promote your shop in the directory.</p>
+                <form onsubmit="handleNewAd(event)" class="space-y-3 text-xs">
+                    <div><label class="font-bold">Shop Name *</label><input required type="text" id="na-title" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Shop Name"></div>
+                    <div><label class="font-bold">Owner Name *</label><input required type="text" id="na-owner" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Owner Name"></div>
+                    <div><label class="font-bold">Tagline & Offer</label><textarea required rows="2" id="na-tagline" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Offer for Samaj members..."></textarea></div>
+                    <div><label class="font-bold">Phone *</label><input required type="text" id="na-phone" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Phone number"></div>
+                    
+                    <!-- Business Subscription Tier -->
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-300 space-y-2">
+                        <label class="font-bold text-amber-900 block">Select Ad Listing Type:</label>
+                        <div class="flex items-center gap-2">
+                            <input type="radio" name="ad_tier" id="tier-free" checked value="free">
+                            <label for="tier-free">Standard Listing (Free)</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="radio" name="ad_tier" id="tier-featured" value="featured">
+                            <label for="tier-featured" class="font-bold text-red-900">👑 Featured Top Banner Ad (₹500 / Year)</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-amber-500 text-red-950 font-bold py-3 rounded-xl shadow">Submit Advertisement</button>
+                </form>
+            `;
+        } else if (type === 'profile') {
+            content.innerHTML = `
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <h2 class="text-2xl font-serif font-bold text-red-950 mb-1">Register Biodata Form</h2>
+                <form onsubmit="handleNewProfile(event)" class="space-y-3 text-xs">
+                    <div><label class="font-bold">Full Name *</label><input required type="text" id="np-name" class="w-full p-2.5 mt-1 border rounded-xl" placeholder="Name"></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><label class="font-bold">Age *</label><input required type="number" id="np-age" class="w-full p-2.5 border rounded-xl"></div>
+                        <div><label class="font-bold">Gender *</label><select id="np-gender" class="w-full p-2.5 border rounded-xl"><option value="Male">Male</option><option value="Female">Female</option></select></div>
+                    </div>
+                    <div><label class="font-bold">Gotra & City *</label><div class="grid grid-cols-2 gap-2"><input required type="text" id="np-gotra" class="w-full p-2.5 border rounded-xl" placeholder="Gotra"><input required type="text" id="np-city" class="w-full p-2.5 border rounded-xl" placeholder="City"></div></div>
+                    <div><label class="font-bold">Contact *</label><input required type="text" id="np-contact" class="w-full p-2.5 border rounded-xl" placeholder="Phone"></div>
+                    <button type="submit" class="w-full bg-red-900 text-amber-100 font-bold py-3 rounded-xl shadow">Submit Profile</button>
+                </form>
+            `;
         }
-    </script>
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function closeModal() {
+        document.getElementById('modal-container').classList.remove('flex');
+        document.getElementById('modal-container').classList.add('hidden');
+    }
+
+    function handleNewAd(e) {
+        e.preventDefault();
+        const isFeatured = document.getElementById('tier-featured').checked;
+        const newA = {
+            id: Date.now(),
+            title: document.getElementById('na-title').value,
+            owner: document.getElementById('na-owner').value,
+            category: "Retail & Shopping",
+            city: "Indore",
+            address: "Main Market",
+            phone: document.getElementById('na-phone').value,
+            tagline: document.getElementById('na-tagline').value,
+            offer: "Special Samaj Discount",
+            rating: "5.0 ★",
+            isFeatured: isFeatured,
+            banner: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80"
+        };
+        ads.unshift(newA);
+        closeModal();
+        renderAds();
+        if (isFeatured) {
+            alert("Ad submitted! Please complete the ₹500 payment via WhatsApp QR to activate your Featured Top Banner badge.");
+        } else {
+            alert("Standard Business Ad published successfully!");
+        }
+    }
+
+    function handleNewProfile(e) {
+        e.preventDefault();
+        const gender = document.getElementById('np-gender').value;
+        const newP = {
+            id: Date.now(),
+            name: document.getElementById('np-name').value,
+            age: document.getElementById('np-age').value,
+            gender: gender,
+            gotra: document.getElementById('np-gotra').value,
+            city: document.getElementById('np-city').value,
+            state: "Madhya Pradesh",
+            education: "Graduate",
+            profession: "Professional",
+            income: "₹5-8 LPA",
+            height: "5' 6\"",
+            familyDetails: "Standard Family Details",
+            photo: gender === 'Female' ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+            verified: true,
+            contact: document.getElementById('np-contact').value,
+            about: "Newly registered member."
+        };
+        profiles.unshift(newP);
+        closeModal();
+        renderProfiles();
+        alert("Biodata registered successfully!");
+    }
+</script>
 </body>
 </html>
