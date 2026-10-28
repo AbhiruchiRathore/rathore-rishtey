@@ -250,13 +250,43 @@
     <script>
     // --- MOCK DATA STORAGE ---
     let profiles = [
-        {
-            id: 1, name: "Vikram Rathore", age: 27, gender: "Male", gotra: "Chauhan", city: "Indore", state: "Madhya Pradesh",
-            education: "B.Tech in Computer Science", profession: "Software Engineer at MNC", income: "₹14-16 LPA", height: "5' 10\"",
-            familyDetails: "Father: Merchant (Business), Mother: Homemaker, 1 Sister (Married)",
-            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-            verified: true, contact: "+91 98765 43210", about: "Looking for an educated, understanding partner with traditional yet modern values."
-        },
+        const biodata = {
+  id: 1,
+  personalDetails: {
+    fullName: "Kirankumar Omprakash Rathore",
+    dob: "25/09/1994",
+    birthTime: "12:40 AM",
+    birthPlace: "Akot, Dist. Akola, Maharashtra",
+    height: "5' 5\"",
+    gotra: "Kadamaiyye",
+    maternalGotra: "Katasare",
+    education: "Graduate (B. A.) and I.T.I.",
+    profession: "Technician at Mahavitaran (M.S.E.B.)",
+    monthlyIncome: "₹50,000/-"
+  },
+  familyDetails: {
+    fatherName: "Shri. Omprakash Mohanlal Rathore",
+    fatherOccupation: "Retired from Government Service",
+    motherName: "Mrs. Uma Omprakash Rathore",
+    motherOccupation: "Homemaker",
+    siblings: {
+      brothers: "1 Younger (Unmarried)",
+      sisters: "1 Younger (Married)"
+    }
+  },
+  contactDetails: {
+    contactPerson: "Shri Omprakash Mohanlal Rathore",
+    phoneNumbers: ["+91 7875923666", "+91 7887368878"],
+    address: {
+      houseName: "Omkar Bhavan",
+      area: "Shree Ji Colony, Shree Shivaji College Road, Ambalkar Layout",
+      city: "Akot",
+      district: "Akola",
+      state: "Maharashtra",
+      pinCode: "444101"
+    }
+  }
+};
         {
             id: 2, name: "Pooja Rathore", age: 25, gender: "Female", gotra: "Parihar", city: "Ujjain", state: "Madhya Pradesh",
             education: "M.Com, B.Ed", profession: "High School Teacher", income: "₹4.5 - 6 LPA", height: "5' 4\"",
