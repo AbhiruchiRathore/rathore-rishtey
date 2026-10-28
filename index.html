@@ -406,68 +406,94 @@
     function setGenderFilter(gender) { currentGenderFilter = gender; renderProfiles(); }
 
     // --- STRICT 3-CONTACT LIMIT MODAL LOGIC ---
-    function openProfileModal(id) {
-        const p = profiles.find(x => x.id === id);
-        if (!p) return;
+   function openProfileModal(id) {
+    const p = profiles.find(x => x.id === id);
+    if (!p) return;
 
-        const isUnlocked = isGoldPassActive || unlockedProfiles.includes(id);
-        const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
+    const isUnlocked = isGoldPassActive || unlockedProfiles.includes(id);
+    const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
 
-        const container = document.getElementById('modal-container');
-        const content = document.getElementById('modal-content');
-        container.classList.remove('hidden');
-        container.classList.add('flex');
+    const container = document.getElementById('modal-container');
+    const content = document.getElementById('modal-content');
+    container.classList.remove('hidden');
+    container.classList.add('flex');
 
-        if (isUnlocked || hasFreeSlots) {
-            if (!isUnlocked && !unlockedProfiles.includes(id)) {
-                unlockedProfiles.push(id);
-                localStorage.setItem('unlocked_profiles', JSON.stringify(unlockedProfiles));
-            }
-            const remaining = FREE_LIMIT - unlockedProfiles.length;
-
-            content.innerHTML = `
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-                <div class="flex items-center justify-between mb-3 bg-amber-100 p-2.5 rounded-xl text-xs font-bold text-amber-900">
-                    <span>🔓 Free Contacts Left: <strong>${isGoldPassActive ? 'Unlimited (Gold Pass)' : (remaining >= 0 ? remaining : 0)}</strong></span>
-                    ${!isGoldPassActive ? '<span class="text-red-900 cursor-pointer underline" onclick="openSubscriptionModal()">Get Gold Pass</span>' : ''}
-                </div>
-                <div class="flex flex-col sm:flex-row gap-5 items-center sm:items-start">
-                    <img src="${p.photo}" alt="${p.name}" class="w-32 h-32 rounded-2xl object-cover border-2 border-amber-400 shadow-md shrink-0">
-                    <div>
-                        <span class="bg-amber-100 text-amber-900 text-xs font-bold px-2.5 py-0.5 rounded-full">Gotra: ${p.gotra}</span>
-                        <h2 class="text-2xl font-bold font-serif text-slate-900 mt-1">${p.name}</h2>
-                        <p class="text-xs text-slate-500 font-semibold">${p.age} Yrs • ${p.height} • ${p.city}</p>
-                    </div>
-                </div>
-                <div class="mt-6 space-y-4 border-t border-amber-100 pt-4 text-xs">
-                    <div><span class="text-slate-500">Education:</span> <p class="font-semibold">${p.education}</p></div>
-                    <div><span class="text-slate-500">Profession:</span> <p class="font-semibold">${p.profession}</p></div>
-                    <div><span class="text-slate-500">Family Background:</span> <p class="font-semibold">${p.familyDetails}</p></div>
-                    <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex justify-between items-center">
-                        <div><p class="text-emerald-900 font-bold">${p.contact}</p><p class="text-[10px] text-emerald-700">Verified Family Contact</p></div>
-                        <a href="tel:${p.contact}" class="bg-emerald-600 text-white font-bold px-4 py-2 rounded-lg text-xs">Call Family</a>
-                    </div>
-                </div>
-            `;
-        } else {
-            // LOCKED VIEW AFTER 3 FREE CONTACTS
-            content.innerHTML = `
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-                <div class="text-center space-y-4 py-4">
-                    <div class="w-20 h-20 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-3xl shadow-inner border">🔒</div>
-                    <h3 class="text-2xl font-serif font-bold text-red-950">Free Contact Limit Reached!</h3>
-                    <p class="text-xs text-slate-600 max-w-sm mx-auto">You have used your 3 free profile contact views. Upgrade to Samaj Gold Pass for unlimited access.</p>
-                    <div class="bg-amber-50 p-4 rounded-2xl border text-left space-y-1 max-w-sm mx-auto text-xs">
-                        <p class="font-bold text-amber-900">👑 Samaj Matrimony Gold Pass</p>
-                        <p class="text-slate-600">✅ Unlimited Contact Details & Photos Unlocked</p>
-                        <p class="font-extrabold text-red-900 text-sm mt-1">Only ₹199 / Year</p>
-                    </div>
-                    <button onclick="openSubscriptionModal()" class="w-full max-w-sm mx-auto bg-amber-500 text-red-950 font-bold py-3 rounded-xl shadow-lg block text-xs">🚀 Unlock Gold Pass Now</button>
-                </div>
-            `;
+    if (isUnlocked || hasFreeSlots) {
+        if (!isUnlocked && !unlockedProfiles.includes(id)) {
+            unlockedProfiles.push(id);
+            localStorage.setItem('unlocked_profiles', JSON.stringify(unlockedProfiles));
         }
-        if (typeof lucide !== 'undefined') lucide.createIcons();
+        const remaining = FREE_LIMIT - unlockedProfiles.length;
+        const profilePhoto = p.photo && p.photo.trim() !== "" ? p.photo : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80";
+
+        content.innerHTML = `
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="flex items-center justify-between mb-3 bg-amber-100 p-2.5 rounded-xl text-xs font-bold text-amber-900">
+                <span>🔓 Free Contacts Left: <strong>${isGoldPassActive ? 'Unlimited (Gold Pass)' : (remaining >= 0 ? remaining : 0)}</strong></span>
+                ${!isGoldPassActive ? '<span class="text-red-900 cursor-pointer underline" onclick="openSubscriptionModal()">Get Gold Pass</span>' : ''}
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-5 items-center sm:items-start">
+                <img src="${profilePhoto}" alt="${p.name}" class="w-28 h-28 rounded-2xl object-cover border-2 border-amber-400 shadow-md shrink-0">
+                <div class="w-full">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="bg-amber-100 text-amber-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full">Gotra: ${p.gotra}</span>
+                        <span class="bg-red-100 text-red-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full">${p.city}, ${p.state}</span>
+                        <span class="bg-blue-100 text-blue-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full">ID: #${p.id}</span>
+                    </div>
+                    <h2 class="text-2xl font-bold font-serif text-slate-900 mt-1">${p.name}</h2>
+                    <p class="text-xs text-slate-600 font-semibold mt-0.5">Age: ${p.age} Yrs  |  Height: ${p.height || 'N/A'}  |  Gender: ${p.gender}</p>
+                    <p class="text-xs text-emerald-700 font-bold mt-1">Income: ${p.income}</p>
+                </div>
+            </div>
+
+            <!-- Complete Details Display Box -->
+            <div class="mt-4 space-y-3 border-t border-amber-100 pt-4 text-xs max-h-[50vh] overflow-y-auto pr-1">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-amber-50/60 p-3 rounded-xl border border-amber-200">
+                    <div><span class="text-slate-500 font-medium">Education:</span> <p class="font-bold text-slate-800">${p.education}</p></div>
+                    <div><span class="text-slate-500 font-medium">Profession:</span> <p class="font-bold text-slate-800">${p.profession}</p></div>
+                </div>
+
+                <div class="bg-amber-50/60 p-3 rounded-xl border border-amber-200 space-y-1">
+                    <span class="text-slate-500 font-bold uppercase text-[10px]">Family Details:</span>
+                    <p class="font-semibold text-slate-800">${p.familyDetails}</p>
+                </div>
+
+                ${p.about ? `
+                <div class="bg-amber-50/60 p-3 rounded-xl border border-amber-200 space-y-1">
+                    <span class="text-slate-500 font-bold uppercase text-[10px]">Additional Notes & Background (About):</span>
+                    <p class="font-semibold text-slate-800">${p.about}</p>
+                </div>` : ''}
+
+                <div class="bg-emerald-50 border border-emerald-300 p-3.5 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                    <div>
+                        <span class="text-[10px] text-emerald-700 font-bold uppercase">Contact Numbers:</span>
+                        <p class="text-emerald-950 font-extrabold text-sm">${p.contact}</p>
+                    </div>
+                    <a href="tel:${p.contact.split(',')[0].trim()}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-lg text-xs shrink-0 flex items-center gap-1.5 shadow">
+                        <i data-lucide="phone" class="w-3.5 h-3.5"></i> Call Family
+                    </a>
+                </div>
+            </div>
+        `;
+    } else {
+        content.innerHTML = `
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="text-center space-y-4 py-4">
+                <div class="w-20 h-20 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-3xl shadow-inner border">🔒</div>
+                <h3 class="text-2xl font-serif font-bold text-red-950">Free Contact Limit Reached!</h3>
+                <p class="text-xs text-slate-600 max-w-sm mx-auto">You have used your 3 free profile contact views. Upgrade to Samaj Gold Pass for unlimited access.</p>
+                <div class="bg-amber-50 p-4 rounded-2xl border text-left space-y-1 max-w-sm mx-auto text-xs">
+                    <p class="font-bold text-amber-900">👑 Samaj Matrimony Gold Pass</p>
+                    <p class="text-slate-600">✅ Unlimited Contact Details & Photos Unlocked</p>
+                    <p class="font-extrabold text-red-900 text-sm mt-1">Only ₹199 / Year</p>
+                </div>
+                <button onclick="openSubscriptionModal()" class="w-full max-w-sm mx-auto bg-amber-500 text-red-950 font-bold py-3 rounded-xl shadow-lg block text-xs">🚀 Unlock Gold Pass Now</button>
+            </div>
+        `;
     }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
 
     // --- SUBSCRIPTION MODALS (Matrimony & Business Listing) ---
     function openSubscriptionModal() {
