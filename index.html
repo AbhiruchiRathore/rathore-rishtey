@@ -497,7 +497,9 @@
     const p = profiles.find(x => x.id === id);
     if (!p) return;
 
-    const isUnlocked = isGoldPassActive || unlockedProfiles.includes(id);
+    // Set this to true while testing, or link it to your developer profile/device
+    const isDeveloper = true; // <-- Change to false when launching to public users
+    const isUnlocked = isGoldPassActive || isDeveloper || unlockedProfiles.includes(id);
     const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
 
     const container = document.getElementById('modal-container');
