@@ -222,6 +222,44 @@
             </div>
         </div>
     </main>
+    <script>
+        // 1. Data variable for events stored in localStorage
+        let samajEvents = JSON.parse(localStorage.getItem('samaj_events')) || [
+            {
+                title: "All India Rathore Youth & Parichay Sammelan",
+                date: "15th Nov 2026",
+                location: "Jaipur, Rajasthan",
+                description: "A grand community gathering for matrimonial introductions, youth leadership, and Samaj welfare discussions."
+            }
+        ];
+
+        // 2. The function that injects the events into your HTML grid
+        function renderEvents() {
+            const grid = document.getElementById('events-grid');
+            if (!grid) return;
+
+            if (samajEvents.length === 0) {
+                grid.innerHTML = `<p class="text-xs text-slate-500 col-span-2 text-center py-8">No community events posted right now.</p>`;
+                return;
+            }
+
+            grid.innerHTML = samajEvents.map(ev => `
+                <div class="bg-white p-5 rounded-2xl border shadow-sm space-y-3 border-l-4 border-l-red-900">
+                    <div class="flex justify-between items-start">
+                        <h4 class="font-bold text-slate-900 text-sm">${ev.title}</h4>
+                        <span class="bg-red-50 text-red-900 text-[10px] font-bold px-2.5 py-1 rounded-full border border-red-200">${ev.date}</span>
+                    </div>
+                    <p class="text-xs text-slate-600 flex items-center gap-1.5 font-medium">📍 ${ev.location}</p>
+                    <p class="text-xs text-slate-700 leading-relaxed">${ev.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Run renderEvents when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEvents();
+        });
+    </script>
 
     <!-- FOOTER -->
     <footer class="bg-red-950 text-amber-200/80 border-t border-amber-500/30 py-8 px-4 sm:px-6 lg:px-8 mt-12">
@@ -234,7 +272,7 @@
                 <button onclick="switchTab('matrimony')" class="hover:text-amber-300">Matrimony</button>
                 <button onclick="switchTab('directory')" class="hover:text-amber-300">Business Ads</button>
                 <button onclick="switchTab('booklet')" class="hover:text-amber-300">E-Booklet</button>
-                <button onclick="switchTab('events')" class="hover:text-amber-300">Samaj Events</button>
+               <button onclick="switchTab('events'); renderEvents();" class="hover:text-amber-300">Samaj Events</button>
             </div>
         </div>
     </footer>
