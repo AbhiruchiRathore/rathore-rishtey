@@ -586,24 +586,50 @@
 
     // --- SUBSCRIPTION MODALS (Matrimony & Business Listing) ---
     function openSubscriptionModal() {
-        const content = document.getElementById('modal-content');
-        content.innerHTML = `
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-            <div class="text-center space-y-3 py-2">
-                <h3 class="text-2xl font-serif font-bold text-red-950">Upgrade to Gold Pass (₹199)</h3>
-                <p class="text-xs text-slate-600">Pay via UPI and send screenshot on WhatsApp for instant activation.</p>
-                <div class="bg-amber-50 p-3 rounded-2xl border inline-block">
-                    <div class="w-36 h-36 bg-white border rounded-lg mx-auto flex items-center justify-center text-center p-2 text-[10px] font-bold">
-                        [ UPI QR CODE ]<br>UPI: samaj@paytm
-                    </div>
-                </div>
-                <a href="https://wa.me/91YOURNUMBER?text=Paid%20₹199%20for%20Rathore%20Rishtey%20Gold%20Pass.%20Screenshot:" target="_blank" class="w-full bg-green-700 text-white font-bold py-3 rounded-xl text-xs block">
-                    💬 Confirm via WhatsApp
+    const content = document.getElementById('modal-content');
+    
+    // Replace with your actual UPI ID and Merchant Name
+    const upiID = "9301120170-3@ybl"; 
+    const payeeName = "Rathore%20Rishtey";
+    const amount = "199.00";
+    const note = "Rathore%20Rishtey%20Gold%20Pass";
+
+    // Standard UPI intent link that automatically triggers GPay, PhonePe, Paytm on mobile devices
+    const upiUrl = `upi://pay?pa=${upiID}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
+
+    content.innerHTML = `
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+        <div class="text-center space-y-4 py-3">
+            <div class="w-16 h-16 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-2xl shadow-inner border">👑</div>
+            <h3 class="text-2xl font-serif font-bold text-red-950">Upgrade to Gold Pass</h3>
+            <p class="text-xs text-slate-600">Get <strong>unlimited access</strong> to all contact details and photos across all profiles for just <strong>₹199/year</strong>.</p>
+            
+            <div class="bg-amber-50 p-4 rounded-2xl border space-y-3">
+                <a href="${upiUrl}" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl text-xs block shadow-lg flex items-center justify-center gap-2">
+                    <i data-lucide="smartphone" class="w-4 h-4"></i> Pay ₹199 via GPay / PhonePe / Paytm
                 </a>
+                <p class="text-[10px] text-slate-500">Clicking this will automatically open your UPI payment app with ₹199 pre-filled.</p>
             </div>
-        `;
-        if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
+
+            <div class="pt-2 border-t border-slate-100">
+                <p class="text-[11px] text-slate-600 mb-2">Already completed your payment?</p>
+                <button onclick="activateGoldPassInstantly()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs shadow">
+                    ✅ I Have Paid — Unlock Gold Pass Instantly
+                </button>
+            </div>
+        </div>
+    `;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+// Instant activation function without needing WhatsApp screenshots
+function activateGoldPassInstantly() {
+    localStorage.setItem('gold_pass', 'true');
+    isGoldPassActive = true;
+    closeModal();
+    alert("🎉 Success! Your Samaj Gold Pass is now active. Enjoy unlimited access!");
+    renderProfiles(); // Refresh view
+}
 
     // Render Business Ads
     function renderAds() {
