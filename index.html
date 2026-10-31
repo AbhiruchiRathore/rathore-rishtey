@@ -47,13 +47,13 @@
 
                 <!-- Quick Action CTA Buttons -->
                 <div class="hidden lg:flex items-center space-x-3">
-                    <button onclick="openModal('profile')" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-red-950 font-bold px-4 py-2 rounded-lg text-xs shadow-md transition-all flex items-center gap-1.5">
-                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Bio Form
-                    </button>
-                    <button onclick="openModal('ad')" class="bg-red-800 hover:bg-red-700 text-amber-200 border border-amber-400/40 font-semibold px-4 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5">
-                        <i data-lucide="store" class="w-4 h-4"></i> Advertise Shop
-                    </button>
-                </div>
+                <button onclick="switchTab('create-profile')" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-red-950 font-bold px-4 py-2 rounded-lg text-xs shadow-md transition-all flex items-center gap-1.5">
+                <i data-lucide="plus-circle" class="w-4 h-4"></i> Create Profile
+             </button>
+                <button onclick="switchTab('advertise-shop')" class="bg-red-800 hover:bg-red-700 text-amber-200 border border-amber-400/40 font-semibold px-4 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5">
+                <i data-lucide="store" class="w-4 h-4"></i> Advertise Shop
+        </button>
+    </div>
 
                 <!-- Mobile Menu Toggle Button -->
                 <div class="md:hidden flex items-center">
@@ -217,6 +217,86 @@
                 <p class="text-xs text-slate-600 mt-1">Stay updated with upcoming matrimonial meets, adhyaksh notices, and community gatherings.</p>
             </div>
 
+            <!-- PAGE / TAB: CREATE PROFILE -->
+<div id="tab-create-profile" class="space-y-6 max-w-2xl mx-auto py-4 hidden">
+    <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+            <div>
+                <h2 class="text-xl font-serif font-bold text-red-950">📝 Create Matrimonial Profile</h2>
+                <p class="text-xs text-slate-500">Fill out your details to list your profile on Rathore Rishtey.</p>
+            </div>
+            <button onclick="switchTab('matrimony')" class="text-xs text-slate-500 hover:text-red-900 font-bold">Cancel ✕</button>
+        </div>
+
+        <form id="create-profile-form" onsubmit="handleProfileSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+                    <input type="text" id="p-name" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Rohit Rathore">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Gender *</label>
+                    <select id="p-gender" required class="w-full border rounded-lg p-2.5 text-xs bg-white">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male (Boy)</option>
+                        <option value="Female">Female (Girl)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Date of Birth *</label>
+                    <input type="date" id="p-dob" required class="w-full border rounded-lg p-2.5 text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Gotra *</label>
+                    <input type="text" id="p-gotra" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Rathore">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Contact Number *</label>
+                    <input type="tel" id="p-phone" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="10-digit mobile number">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Education *</label>
+                    <input type="text" id="p-education" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., B.Tech, MBA, Graduate">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Occupation *</label>
+                    <input type="text" id="p-occupation" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Software Engineer, Business">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Annual Income</label>
+                    <input type="text" id="p-income" class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., 6 LPA">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Native Place / Hometown *</label>
+                    <input type="text" id="p-native" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Khargone, Indore">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Current City / Location</label>
+                    <input type="text" id="p-location" class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Pune">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">About / Expectations / Bio *</label>
+                <textarea id="p-bio" rows="3" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="Write briefly about education, family background, and expectations..."></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-red-900 hover:bg-red-800 text-white font-bold py-3 rounded-xl text-xs shadow-lg">
+                Publish Profile to App Directory
+            </button>
+        </form>
+    </div>
+</div>
+
             <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Injected via JavaScript -->
             </div>
@@ -276,6 +356,42 @@
 document.addEventListener('DOMContentLoaded', () => {
     renderEvents();
 });
+
+        // Handle Profile Form Submission
+function handleProfileSubmit(e) {
+    e.preventDefault();
+
+    const newProfile = {
+        name: document.getElementById('p-name').value,
+        gender: document.getElementById('p-gender').value,
+        dob: document.getElementById('p-dob').value,
+        gotra: document.getElementById('p-gotra').value,
+        phone: document.getElementById('p-phone').value,
+        education: document.getElementById('p-education').value,
+        occupation: document.getElementById('p-occupation').value,
+        income: document.getElementById('p-income').value || 'Not Specified',
+        native: document.getElementById('p-native').value,
+        location: document.getElementById('p-location').value || document.getElementById('p-native').value,
+        bio: document.getElementById('p-bio').value,
+        createdAt: new Date().toISOString()
+    };
+
+    // Fetch existing profiles or initialize array
+    let userProfiles = JSON.parse(localStorage.getItem('samaj_profiles')) || [];
+    userProfiles.unshift(newProfile); // Add to the top
+    localStorage.setItem('samaj_profiles', JSON.stringify(userProfiles));
+
+    // Reset form and redirect back to Matrimony Tab
+    document.getElementById('create-profile-form').reset();
+    alert("🎉 Success! Your profile has been successfully published to the Rathore Rishtey directory.");
+    
+    if (typeof switchTab === 'function') {
+        switchTab('matrimony');
+    }
+    if (typeof renderProfiles === 'function') {
+        renderProfiles();
+    }
+}
     </script>
 
     <!-- FOOTER -->
