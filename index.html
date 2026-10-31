@@ -302,6 +302,57 @@
     </div>
 </div>
 
+        <!-- PAGE / TAB: ADVERTISE SHOP -->
+<div id="tab-advertise-shop" class="space-y-6 max-w-2xl mx-auto py-4 hidden">
+    <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+            <div>
+                <h2 class="text-xl font-serif font-bold text-red-950">🏪 Advertise Your Shop / Business</h2>
+                <p class="text-xs text-slate-500">Promote your business across the Rathore Samaj network.</p>
+            </div>
+            <button onclick="switchTab('business')" class="text-xs text-slate-500 hover:text-red-900 font-bold">Cancel ✕</button>
+        </div>
+
+        <form id="advertise-shop-form" onsubmit="handleShopSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Business / Shop Name *</label>
+                    <input type="text" id="shop-name" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Rathore Shree Dresses">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Owner Name *</label>
+                    <input type="text" id="shop-owner" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Ramchandra Rathore">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Business Category *</label>
+                    <input type="text" id="shop-category" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Clothing, Jewelry, Hardware">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Contact Number *</label>
+                    <input type="tel" id="shop-phone" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="10-digit mobile number">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Shop Address / Location *</label>
+                <input type="text" id="shop-address" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="e.g., Radha Vल्लभ Market, Khargone">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Business Description & Special Offers *</label>
+                <textarea id="shop-desc" rows="3" required class="w-full border rounded-lg p-2.5 text-xs" placeholder="Write about your products, services, or special discounts for Samaj members..."></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-red-900 hover:bg-red-800 text-white font-bold py-3 rounded-xl text-xs shadow-lg">
+                Publish Business Ad
+            </button>
+        </form>
+    </div>
+</div>
+
     </main>
     <script>
         // 1. Data variable for events stored in localStorage
@@ -391,6 +442,37 @@ function handleProfileSubmit(e) {
     }
     if (typeof renderProfiles === 'function') {
         renderProfiles();
+    }
+}
+
+        // Handle Shop Ad Submission
+function handleShopSubmit(e) {
+    e.preventDefault();
+
+    const newAd = {
+        name: document.getElementById('shop-name').value,
+        owner: document.getElementById('shop-owner').value,
+        category: document.getElementById('shop-category').value,
+        phone: document.getElementById('shop-phone').value,
+        address: document.getElementById('shop-address').value,
+        description: document.getElementById('shop-desc').value,
+        createdAt: new Date().toISOString()
+    };
+
+    // Fetch existing ads or initialize array
+    let businessAds = JSON.parse(localStorage.getItem('samaj_ads')) || [];
+    businessAds.unshift(newAd); // Add to the top
+    localStorage.setItem('samaj_ads', JSON.stringify(businessAds));
+
+    // Reset form and redirect back to Business Ads tab
+    document.getElementById('advertise-shop-form').reset();
+    alert("🎉 Success! Your business advertisement has been published.");
+    
+    if (typeof switchTab === 'function') {
+        switchTab('business');
+    }
+    if (typeof renderAds === 'function') {
+        renderAds();
     }
 }
     </script>
