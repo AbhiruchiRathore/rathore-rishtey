@@ -778,6 +778,13 @@ function handleShopSubmit(e) {
     const p = profiles.find(x => x.id === id);
     if (!p) return;
 
+       // 0. Check if user has registered their own profile in 'samaj_profiles' to unlock unlimited access
+    const userProfiles = JSON.parse(localStorage.getItem('samaj_profiles')) || [];
+    const hasRegisteredProfile = userProfiles.length > 0;
+
+    const isUnlocked = hasRegisteredProfile || unlockedProfiles.includes(id);
+    const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
+
     // 1. Check if this specific profile is already unlocked
     const isUnlocked = unlockedProfiles.includes(id);
     const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
