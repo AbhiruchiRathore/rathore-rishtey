@@ -778,9 +778,7 @@ function handleShopSubmit(e) {
     const p = profiles.find(x => x.id === id);
     if (!p) return;
 
-    // Set this to true while testing, or link it to your developer profile/device
-    const isDeveloper = false; // <-- Change to false when launching to public users
-    const isUnlocked = isGoldPassActive || isDeveloper || unlockedProfiles.includes(id);
+    const isUnlocked = unlockedProfiles.includes(id);
     const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
 
     const container = document.getElementById('modal-container');
@@ -799,8 +797,8 @@ function handleShopSubmit(e) {
         content.innerHTML = `
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
             <div class="flex items-center justify-between mb-3 bg-amber-100 p-2.5 rounded-xl text-xs font-bold text-amber-900">
-                <span>🔓 Free Contacts Left: <strong>${isGoldPassActive ? 'Unlimited (Gold Pass)' : (remaining >= 0 ? remaining : 0)}</strong></span>
-                ${!isGoldPassActive ? '<span class="text-red-900 cursor-pointer underline" onclick="openSubscriptionModal()">Get Gold Pass</span>' : ''}
+                <span>🔓 Free Contacts Left: <strong>${remaining >= 0 ? remaining : 0}</strong></span>
+                <span class="text-slate-600">Contribute profile to support Samaj</span>
             </div>
             
             <div class="flex flex-col sm:flex-row gap-5 items-center sm:items-start">
@@ -812,7 +810,7 @@ function handleShopSubmit(e) {
                         <span class="bg-blue-100 text-blue-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full">ID: #${p.id}</span>
                     </div>
                     <h2 class="text-2xl font-bold font-serif text-slate-900 mt-1">${p.name}</h2>
-                    <p class="text-xs text-slate-600 font-semibold mt-0.5">Age: ${p.age} Yrs  |  Height: ${p.height || 'N/A'}  |  Gender: ${p.gender}</p>
+                    <p class="text-xs text-slate-600 font-semibold mt-0.5">Age: ${p.age} Yrs  |  Height: ${p.height || 'N/A'}  |  Gender: ${p.gender}</p>
                     <p class="text-xs text-emerald-700 font-bold mt-1">Income: ${p.income}</p>
                 </div>
             </div>
@@ -829,7 +827,7 @@ function handleShopSubmit(e) {
                     <p class="font-semibold text-slate-800">${p.familyDetails}</p>
                 </div>
 
-                ${p.about ? `
+${p.about ? `
                 <div class="bg-amber-50/60 p-3 rounded-xl border border-amber-200 space-y-1">
                     <span class="text-slate-500 font-bold uppercase text-[10px]">Additional Notes & Background (About):</span>
                     <p class="font-semibold text-slate-800">${p.about}</p>
@@ -850,15 +848,16 @@ function handleShopSubmit(e) {
         content.innerHTML = `
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 p-1 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
             <div class="text-center space-y-4 py-4">
-                <div class="w-20 h-20 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-3xl shadow-inner border">🔒</div>
-                <h3 class="text-2xl font-serif font-bold text-red-950">Free Contact Limit Reached!</h3>
-                <p class="text-xs text-slate-600 max-w-sm mx-auto">You have used your 3 free profile contact views. Upgrade to Samaj Gold Pass for unlimited access.</p>
+                <div class="w-20 h-20 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-3xl shadow-inner border">📝</div>
+                <h3 class="text-2xl font-serif font-bold text-red-950">Free View Limit Reached!</h3>
+                <p class="text-xs text-slate-600 max-w-sm mx-auto">You have viewed 3 free biodatas. To view unlimited community profiles, please publish your own family's profile to the Rathore Rishtey directory.</p>
                 <div class="bg-amber-50 p-4 rounded-2xl border text-left space-y-1 max-w-sm mx-auto text-xs">
-                    <p class="font-bold text-amber-900">👑 Samaj Matrimony Gold Pass</p>
-                    <p class="text-slate-600">✅ Unlimited Contact Details & Photos Unlocked</p>
-                    <p class="font-extrabold text-red-900 text-sm mt-1">Only ₹199 / Year</p>
+                    <p class="font-bold text-amber-900">🤝 Community Mutual Sharing Policy</p>
+                    <p class="text-slate-600">✅ Help strengthen the Samaj network by sharing your profile</p>
                 </div>
-                <button onclick="openSubscriptionModal()" class="w-full max-w-sm mx-auto bg-amber-500 text-red-950 font-bold py-3 rounded-xl shadow-lg block text-xs">🚀 Unlock Gold Pass Now</button>
+                <button onclick="closeModal(); switchTab('create-profile');" class="w-full max-w-sm mx-auto bg-red-900 hover:bg-red-800 text-white font-bold py-3 rounded-xl shadow-lg block text-xs">
+                    📝 Create Your Profile Now
+                </button>
             </div>
         `;
     }
