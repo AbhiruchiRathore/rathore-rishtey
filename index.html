@@ -222,6 +222,55 @@
             </div>
         </div>
 
+
+    <!-- TAB: SIMPLE USER SIGN UP -->
+<div id="tab-signup" class="space-y-6 max-w-md mx-auto py-8 hidden">
+    <div class="bg-white p-6 md:p-8 rounded-2xl border border-amber-200 shadow-xl space-y-6 text-center">
+        <div>
+            <div class="w-14 h-14 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-2xl mb-2 border border-amber-300">🔐</div>
+            <h2 class="text-2xl font-serif font-bold text-red-950">Welcome to Rathore Rishtey</h2>
+            <p class="text-xs text-slate-600 mt-1">Sign in to start browsing community profiles (3 free views included).</p>
+        </div>
+
+        <div class="space-y-3">
+            <!-- Google Sign Up / Sign In Button -->
+            <button onclick="handleGoogleSignIn()" class="w-full flex items-center justify-center gap-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold py-3 px-4 rounded-xl shadow-sm transition-all text-xs">
+                <svg class="w-4 h-4" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.32 7.23 24 12 24z"/>
+                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.1 0 9.8 0 12s.43 3.9 1.19 5.42l4.09-3.15z"/>
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.68 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                </svg>
+                Continue with Google
+            </button>
+
+            <div class="relative flex py-2 items-center">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="flex-shrink mx-4 text-slate-400 text-[11px]">OR USE PHONE NUMBER</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+
+            <!-- Phone Number Sign Up -->
+            <form onsubmit="handlePhoneSignIn(event)" class="space-y-3 text-left">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1 text-xs">Mobile Number *</label>
+                    <div class="flex gap-2">
+                        <span class="bg-amber-50 border border-amber-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-700 flex items-center">+91</span>
+                        <input type="tel" id="auth-phone" required placeholder="10-digit mobile number" maxlength="10" class="w-full p-2.5 border border-amber-300 rounded-xl focus:ring-2 focus:ring-amber-500 bg-amber-50/30 text-xs">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-red-900 hover:bg-red-800 text-amber-100 font-bold py-3 rounded-xl shadow-lg transition-all text-xs">
+                    Get Verification Code (OTP)
+                </button>
+            </form>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500">
+            Note: Signing in allows you to browse profiles. To unlock <strong>unlimited access</strong>, you will need to publish your family's profile in the directory.
+        </div>
+    </div>
+</div>
+
         <!-- PAGE / TAB: CREATE PROFILE -->
 <div id="tab-create-profile" class="space-y-6 max-w-2xl mx-auto py-4 hidden">
     <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
@@ -496,6 +545,46 @@ function handleShopSubmit(e) {
     if (typeof renderAds === 'function') {
         renderAds();
     }
+}
+
+        // Simulate Google Sign-In
+function handleGoogleSignIn() {
+    // Save basic session token (does NOT unlock unlimited views yet)
+    localStorage.setItem('user_auth_session', JSON.stringify({
+        method: 'Google',
+        name: 'Google User',
+        loggedInAt: new Date().toISOString()
+    }));
+
+    alert("✅ Successfully signed in with Google! You have 3 free profile views. Share your family profile anytime to unlock unlimited access.");
+    
+    // Redirect back to main directory
+    switchTab('matrimony');
+    if (typeof renderProfiles === 'function') renderProfiles();
+}
+
+// Simulate Phone Number / OTP Sign-In
+function handlePhoneSignIn(event) {
+    event.preventDefault();
+    const phone = document.getElementById('auth-phone').value.trim();
+
+    if (phone.length < 10) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+
+    // Save session (does NOT unlock unlimited views yet)
+    localStorage.setItem('user_auth_session', JSON.stringify({
+        method: 'Phone',
+        phone: phone,
+        loggedInAt: new Date().toISOString()
+    }));
+
+    alert(`✅ OTP verified for +91 ${phone}! You can now browse community profiles.`);
+    
+    // Redirect back to main directory
+    switchTab('matrimony');
+    if (typeof renderProfiles === 'function') renderProfiles();
 }
     </script>
 
