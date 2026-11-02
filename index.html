@@ -774,6 +774,11 @@ function handleShopSubmit(e) {
     function setGenderFilter(gender) { currentGenderFilter = gender; renderProfiles(); }
 
     // --- STRICT 3-CONTACT LIMIT MODAL LOGIC ---
+
+        // Load previously unlocked profiles from localStorage (defaults to empty array)
+let unlockedProfiles = JSON.parse(localStorage.getItem('unlocked_profiles')) || [];
+const FREE_LIMIT = 3;
+        
    function openProfileModal(id) {
     const p = profiles.find(x => x.id === id);
     if (!p) return;
