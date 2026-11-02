@@ -43,6 +43,9 @@
                     <button onclick="switchTab('events')" id="nav-btn-events" class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all text-amber-100 hover:bg-white/10">
                         <i data-lucide="calendar" class="w-4 h-4"></i> Samaj Events
                     </button>
+                    <button onclick="switchTab('signup')" id="nav-btn-signup" class="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all text-amber-100 hover:bg-white/10">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i> Sign Up
+                    </button>
                 </nav>
 
                 <!-- Quick Action CTA Buttons -->
@@ -785,7 +788,7 @@ function handlePhoneSignIn(event) {
     // Tab Navigation
     function switchTab(tab) {
         // Added 'create-profile' and 'advertise-shop' here so they hide correctly
-        ['matrimony', 'directory', 'booklet', 'events', 'create-profile', 'advertise-shop'].forEach(t => {
+        ['matrimony', 'directory', 'booklet', 'events', 'signup', 'create-profile', 'advertise-shop'].forEach(t => {
             const el = document.getElementById(`tab-${t}`);
             if (el) el.classList.add('hidden');
             const btn = document.getElementById(`nav-btn-${t}`);
