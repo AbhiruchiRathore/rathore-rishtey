@@ -778,6 +778,7 @@ function handleShopSubmit(e) {
     const p = profiles.find(x => x.id === id);
     if (!p) return;
 
+    // 1. Check if this specific profile is already unlocked
     const isUnlocked = unlockedProfiles.includes(id);
     const hasFreeSlots = unlockedProfiles.length < FREE_LIMIT;
 
@@ -786,12 +787,17 @@ function handleShopSubmit(e) {
     container.classList.remove('hidden');
     container.classList.add('flex');
 
-    if (isUnlocked || hasFreeSlots) {
-        if (!isUnlocked && !unlockedProfiles.includes(id)) {
-            unlockedProfiles.push(id);
-            localStorage.setItem('unlocked_profiles', JSON.stringify(unlockedProfiles));
-        }
-        const remaining = FREE_LIMIT - unlockedProfiles.length;
+    // 2. If not unlocked yet, but user has free slots left, unlock it now
+    if (!isUnlocked && hasFreeSlots) {
+        unlockedProfiles.push(id);
+        localStorage.setItem('unlocked_profiles', JSON.stringify(unlockedProfiles));
+    }
+
+    // Re-check unlocked status after pushing
+    const currentlyUnlocked = unlockedProfiles.includes(id);
+    const remaining = FREE_LIMIT - unlockedProfiles.length;
+
+    if (currentlyUnlocked) {
         const profilePhoto = p.photo && p.photo.trim() !== "" ? p.photo : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80";
 
         content.innerHTML = `
@@ -827,7 +833,7 @@ function handleShopSubmit(e) {
                     <p class="font-semibold text-slate-800">${p.familyDetails}</p>
                 </div>
 
-${p.about ? `
+                ${p.about ? `
                 <div class="bg-amber-50/60 p-3 rounded-xl border border-amber-200 space-y-1">
                     <span class="text-slate-500 font-bold uppercase text-[10px]">Additional Notes & Background (About):</span>
                     <p class="font-semibold text-slate-800">${p.about}</p>
@@ -863,7 +869,6 @@ ${p.about ? `
     }
     if (typeof lucide !== 'undefined') lucide.createIcons();
 }
-
   /*  // --- SUBSCRIPTION MODALS (Matrimony & Business Listing) ---
     function openSubscriptionModal() {
     const content = document.getElementById('modal-content');
